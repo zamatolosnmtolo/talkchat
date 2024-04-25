@@ -10,7 +10,7 @@ body {
 }
 
 .App header {
-  background-color: #dc3545; /* Red header color */
+  background-color: #ffc107; /* Yellow header color */
   color: white;
   padding: 15px 20px; /* Increased padding */
   display: flex;
@@ -71,6 +71,7 @@ form {
   padding: 20px;
   display: flex;
   align-items: center;
+  justify-content: center; /* Center form horizontally */
   width: 100%;
   border-radius: 25px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow */
@@ -85,7 +86,7 @@ form input {
 }
 
 form button {
-  background-color: #dc3545; /* Red button color */
+  background-color: #ffc107; /* Yellow button color */
   color: white;
   border: none;
   cursor: pointer;
@@ -102,7 +103,7 @@ form button {
 }
 
 .sent p {
-  background: #dc3545; /* Red message background */
+  background: #ffc107; /* Yellow message background */
   color: white;
   padding: 10px;
   border-radius: 20px;
@@ -120,4 +121,16 @@ img {
   height: 40px;
   border-radius: 50%;
   margin-right: 10px; /* Adjusted margin */
+}
+.message-container {
+  display: flex;
+  justify-content: flex-start; /* Align sent messages to the left */
+}
+
+.sent .message {
+  margin-left: auto; /* Push sent messages to the right edge of the container */
+}
+
+.received .message {
+  margin-right: auto; /* Push received messages to the left edge of the container */
 }

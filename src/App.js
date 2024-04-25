@@ -1,12 +1,13 @@
+// App.js
 import React, { useRef, useState } from 'react';
 import './App.css';
-
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import 'firebase/compat/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import ChatMessage from './ChatMessage'; // Import the modified ChatMessage component
 
 firebase.initializeApp({
   apiKey: "AIzaSyDnB3pL_OA7sCsLK3nJJVmTtELhPZhOEi8",
@@ -20,8 +21,6 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-// eslint-disable-next-line
-const analytics = firebase.analytics();
 
 function App() {
   const [user] = useAuthState(auth);
@@ -32,10 +31,8 @@ function App() {
       .catch(error => {
         if (error.code === 'auth/cancelled-popup-request') {
           console.log('Popup request cancelled');
-          // Handle cancelled popup request
         } else {
           console.error('Authentication error:', error.message);
-          // Handle other authentication errors
         }
       });
   };
@@ -43,7 +40,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>⚛️🔥💬</h1>
+        <h1>TalkChat App</h1>
         <SignOut />
       </header>
       <section>
@@ -92,29 +89,33 @@ function ChatRoom() {
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const deleteMessage = async (messageId) => {
+    const messageRef = messagesRef.doc(messageId);
+
+    try {
+      await messageRef.delete();
+    } catch (error) {
+      console.error('Error deleting message:', error);
+    }
+  };
+
+  const replyToMessage = async (message) => {
+    setFormValue(`@${message.uid} `); // Prefill the form with the user's ID for replying
+  };
+
   return (
     <>
       <main>
-        {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
+        {messages && messages.map(msg => (
+          <ChatMessage key={msg.id} message={msg} onDelete={deleteMessage} onReply={replyToMessage} auth={auth} />
+        ))}
         <span ref={dummy}></span>
       </main>
       <form onSubmit={sendMessage}>
         <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
-        <button type="submit" disabled={!formValue}>🕊️</button>
+        <button type="submit" disabled={!formValue}>Send</button>
       </form>
     </>
-  );
-}
-
-function ChatMessage({ message }) {
-  const { text, uid, photoURL } = message;
-  const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
-
-  return (
-    <div className={`message ${messageClass}`}>
-      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} alt="User" />
-      <p>{text}</p>
-    </div>
   );
 }
 
