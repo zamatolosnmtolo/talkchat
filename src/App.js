@@ -1,4 +1,3 @@
-// App.js
 import React, { useRef, useState } from 'react';
 import './App.css';
 import firebase from 'firebase/compat/app';
@@ -7,7 +6,8 @@ import 'firebase/compat/auth';
 import 'firebase/compat/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import ChatMessage from './ChatMessage'; // Import the modified ChatMessage component
+import ChatMessage from './ChatMessage';
+import SignIn from './SignIn';
 
 firebase.initializeApp({
   apiKey: "AIzaSyDnB3pL_OA7sCsLK3nJJVmTtELhPZhOEi8",
@@ -37,6 +37,15 @@ function App() {
       });
   };
 
+  const handleSignInWithEmail = (email, password) => {
+    auth.signInWithEmailAndPassword(email, password)
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Authentication error:', errorCode, errorMessage);
+      });
+  };
+
   return (
     <div className="App">
       <header>
@@ -44,18 +53,9 @@ function App() {
         <SignOut />
       </header>
       <section>
-        {user ? <ChatRoom /> : <SignIn signInWithGoogle={signInWithGoogle} />}
+        {user ? <ChatRoom /> : <SignIn signInWithGoogle={signInWithGoogle} handleSignInWithEmail={handleSignInWithEmail} />}
       </section>
     </div>
-  );
-}
-
-function SignIn({ signInWithGoogle }) {
-  return (
-    <>
-      <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
-      <p>Do not violate the community guidelines or you will be banned for life!</p>
-    </>
   );
 }
 
@@ -100,7 +100,7 @@ function ChatRoom() {
   };
 
   const replyToMessage = async (message) => {
-    setFormValue(`@${message.uid} `); // Prefill the form with the user's ID for replying
+    setFormValue(`@${message.uid} `);
   };
 
   return (

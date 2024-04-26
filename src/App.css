@@ -1,36 +1,36 @@
 body {
-  background-color: #f8f9fa; /* Light background */
+  background-color: #f8f9fa;
   margin: 0;
   font-family: Arial, sans-serif;
 }
 
 .App {
-  max-width: 800px; /* Increased max-width */
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.App header {
-  background-color: #ffc107; /* Yellow header color */
+header {
+  background-color: #ffc107;
   color: white;
-  padding: 15px 20px; /* Increased padding */
+  padding: 15px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Align items to each side */
+  justify-content: space-between;
 }
 
-.App header h1 {
+header h1 {
   margin: 0;
   font-size: 1.5rem;
 }
 
-.App header img {
+header img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
 }
 
-.App header button {
+header button {
   background-color: transparent;
   border: none;
   color: white;
@@ -38,19 +38,20 @@ body {
   cursor: pointer;
 }
 
-.App section {
+section {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Messages at the bottom */
-  align-items: flex-start; /* Align messages to the left */
+  justify-content: flex-end;
+  align-items: flex-start;
   min-height: 100vh;
-  background-color: #f8f9fa; /* Light background */
+  background-color: #f8f9fa;
   padding: 20px;
 }
 
 main {
-  flex: 1; /* Expand to fill remaining space */
+  flex: 1;
   overflow-y: auto;
+  min-width: 780px;
 }
 
 main::-webkit-scrollbar {
@@ -58,23 +59,23 @@ main::-webkit-scrollbar {
 }
 
 main::-webkit-scrollbar-track {
-  background: #f8f9fa; /* Light background */
+  background: #f8f9fa;
 }
 
 main::-webkit-scrollbar-thumb {
-  background: #adb5bd; /* Lighter scrollbar thumb color */
+  background: #adb5bd;
   border-radius: 5px;
 }
 
 form {
-  background-color: #fff; /* White background */
+  background-color: #fff;
   padding: 20px;
   display: flex;
   align-items: center;
-  justify-content: center; /* Center form horizontally */
+  justify-content: center;
   width: 100%;
   border-radius: 25px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 form input {
@@ -86,7 +87,7 @@ form input {
 }
 
 form button {
-  background-color: #ffc107; /* Yellow button color */
+  background-color: #ffc107;
   color: white;
   border: none;
   cursor: pointer;
@@ -95,22 +96,66 @@ form button {
   padding: 10px 20px;
 }
 
+.sign-in-container {
+  background-image: url('ryoji-iwata-U-L8q6L5FU0-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.sign-in-form {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sign-in-form input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.sign-in-form button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sign-in-form button:hover {
+  background-color: #ffa000;
+}
+
+@media (max-width: 600px) {
+  .sign-in-form {
+    width: 90%;
+  }
+}
+
 .message {
   display: flex;
-  align-items: flex-start; /* Align messages to the left */
-  max-width: 80%; /* Limit message width */
-  margin-bottom: 10px; /* Added margin between messages */
+  align-items: flex-start;
+  max-width: 80%;
+  margin-bottom: 10px;
 }
 
 .sent p {
-  background: #ffc107; /* Yellow message background */
+  background: #ffc107;
   color: white;
   padding: 10px;
   border-radius: 20px;
 }
 
 .received p {
-  background: #fff; /* White message background */
+  background: #fff;
   color: #333;
   padding: 10px;
   border-radius: 20px;
@@ -120,17 +165,18 @@ img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right: 10px; /* Adjusted margin */
+  margin-right: 10px;
 }
+
 .message-container {
   display: flex;
-  justify-content: flex-start; /* Align sent messages to the left */
+  justify-content: flex-start;
 }
 
 .sent .message {
-  margin-left: auto; /* Push sent messages to the right edge of the container */
+  margin-left: auto;
 }
 
 .received .message {
-  margin-right: auto; /* Push received messages to the left edge of the container */
+  margin-right: auto;
 }
